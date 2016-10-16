@@ -6,13 +6,10 @@ class InflateBehavior : UIDynamicBehavior {
     static var minInflation: CGFloat = 0.66
     static var distThreshold: CGFloat = 100
     
-    var view: UIView?
-    var point: CGPoint?  //a point close to which we inflate the view
-    
     class func applyTransform(to view: UIView, withCenter point: CGPoint) {
         let d = CGFloat(distanceBetween(p1: view.center, p2: point))
         
-        let diff:CGFloat = (InflateBehavior.maxInflation - InflateBehavior.minInflation)
+        let diff: CGFloat = (InflateBehavior.maxInflation - InflateBehavior.minInflation)
         let startScale = InflateBehavior.minInflation + diff/2
         var scale: CGFloat = startScale + diff * (InflateBehavior.distThreshold/2 - d) / InflateBehavior.distThreshold/2
         if scale > InflateBehavior.maxInflation {
@@ -23,14 +20,9 @@ class InflateBehavior : UIDynamicBehavior {
         view.layer.transform = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
     }
     
-    override init() {
-        super.init()
-        action = { [unowned self] in
-            guard let view = self.view,
-                let point = self.point else {
-                    return
-            }
-            InflateBehavior.applyTransform(to: view, withCenter: point)
-        }
+    convenience init(view: UIView, point: CGPoint) {
+        self.init()
+
+        action = {InflateBehavior.applyTransform(to: view, withCenter: point)}
     }
 }

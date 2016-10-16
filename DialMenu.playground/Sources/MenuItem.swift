@@ -4,11 +4,10 @@ import UIKit
 public class MenuItem: UIView {
     static let bubbleSize: CGFloat = 100
     
-    // var view: UIView
     var title: String = ""
     
     public convenience init(title: String) {
-        self.init(frame: CGRect(x: 0, y: 0, width: MenuItem.bubbleSize , height: MenuItem.bubbleSize))
+        self.init(frame: CGRect(x: 0, y: 0, width: MenuItem.bubbleSize, height: MenuItem.bubbleSize))
         self.title = title
         
         self.backgroundColor = rndColor()

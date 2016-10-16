@@ -36,7 +36,7 @@ public class DialMenu : UIView {
 
     private func hideSubitems() {
         self.itemViews.forEach {
-            $0.center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+            $0.center = self.dialCenter
             $0.alpha = 0
         }
     }
@@ -69,9 +69,7 @@ public class DialMenu : UIView {
                 attach(item: item, to: prevView)
             }
 
-            let inflate = InflateBehavior()
-            inflate.view = item
-            inflate.point = self.snapPoint
+            let inflate = InflateBehavior(view: item, point: self.snapPoint)
             animator?.addBehavior(inflate)
 
             prev = item
